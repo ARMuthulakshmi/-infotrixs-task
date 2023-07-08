@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TODO List</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>TODO List</h1>
+  
+  <form action="/add" method="POST">
+    <input type="text" name="task" placeholder="Enter a task" required>
+    <button type="submit">Add Task</button>
+  </form>
+  
+  <ul>
+    <% todos.forEach(todo => { %>
+      <li>
+        <span class="<%= todo.completed ? 'completed' : '' %>"><%= todo.task %></span>
+        <form action="/complete/<%= todo._id %>" method="POST" class="inline-form">
+          <button type="submit"><%= todo.completed ? 'Incomplete' : 'Complete' %></button>
+        </form>
+        <form action="/delete/<%= todo._id %>" method="POST" class="inline-form">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+  
+  <script src="/script.js"></script>
+</body>
+</html>
